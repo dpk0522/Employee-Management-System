@@ -1,0 +1,33 @@
+Which one should you use?
+
+@ModelAttribute: Best for standard HTML form submissions (best practice for Thymeleaf/JSP).
+"...
+@PostMapping("/saveEmployee")
+	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+		es.saveEmployee(employee);
+		return "redirect:/";
+	} other was to get data from form
+..."
+	
+	
+@RequestParam: Best for simple forms or search filters.
+"...
+@PostMapping("/saveEmployee")
+public String saveEmployee(@RequestParam("firstName") String firstName, 
+                           @RequestParam("email") String email) {
+    Employee employee = new Employee(firstName, email);
+    es.saveEmployee(employee);
+    return "redirect:/";
+}
+..."
+
+
+@RequestBody: Best for REST APIs and modern JavaScript frontends.
+"...
+@PostMapping("/saveEmployee")
+public String saveEmployee(@RequestBody Employee employee) {
+    es.saveEmployee(employee);
+    return "redirect:/";
+}
+..."
+
